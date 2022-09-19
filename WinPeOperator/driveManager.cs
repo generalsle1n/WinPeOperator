@@ -8,5 +8,9 @@ namespace WinPeOperator
 {
     internal class driveManager
     {
+        public string getSystemDrive()
+        {
+            return "";
+        }
     }
 }

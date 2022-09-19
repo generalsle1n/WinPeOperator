@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using WinPeOperator;
+
+registryManager a = new registryManager("C:");
+Console.WriteLine(a.getHostnameFromRegistry());
