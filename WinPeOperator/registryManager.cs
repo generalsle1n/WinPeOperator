@@ -12,36 +12,59 @@ namespace WinPeOperator
     {
         private string systemDrive;
         private const string registryPath = @"\Windows\System32\config\SYSTEM";
-        private const string keyPath = @"ControlSet001\Control\ComputerName\ComputerNaame";
+        private const string keyPath = @"ControlSet001\Control\ComputerName\ComputerName";
         public registryManager(string systemDrive)
         {
             //this.systemDrive = systemDrive;
-            this.systemDrive = @$"{systemDrive}\temp\SYSTEM";
+            this.systemDrive = systemDrive;
         }
 
-        public string getHostnameFromRegistry()
+        public string getHostnameFromRegistry(string alternativePath = "")
         {
+            RegistryHiveOnDemand hive = null;
+            List<KeyValue> allValues = null;
             string computerName = null;
-            string fullPath = systemDrive + registryPath;
+            string registryEndPath;
+            if (alternativePath == null)
+            {
+                registryEndPath = systemDrive + registryPath;
+            }
+            else
+            {
+                registryEndPath = alternativePath;
+            }
 
             try
             {
-                RegistryHiveOnDemand hive = new RegistryHiveOnDemand(systemDrive);
-                RegistryKey keys = hive.GetKey(keyPath);
-                List<KeyValue> allValues = keys.Values;
-                foreach (KeyValue single in allValues)
+                hive = new RegistryHiveOnDemand(registryEndPath);
+            }
+            catch (FileNotFoundException error)
+            {
+                Console.WriteLine($"The file is not found: {registryEndPath}");
+            }
+            catch (IOException error)
+            {
+                Console.WriteLine($"There is an IO Error, this is common, when the file is already in use");
+            }
+
+            RegistryKey keys = hive.GetKey(keyPath);
+
+            if (keys == null)
+            {
+                Console.WriteLine("There are no Keys found");
+            }
+            else
+            {
+                allValues = keys.Values.ToList<KeyValue>();
+            }
+            foreach (KeyValue single in allValues)
+            {
+                if (single.ValueName.Equals("ComputerName"))
                 {
-                    if (single.ValueName.Equals("ComputerName"))
-                    {
-                        computerName = single.ValueData;
-                    }
+                    computerName = single.ValueData;
+                    break;
                 }
             }
-            catch (Exception e)
-            {
-
-            }
-            
 
             return computerName;
         }
