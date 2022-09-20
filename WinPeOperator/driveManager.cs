@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,22 +9,23 @@ namespace WinPeOperator
 {
     internal class driveManager
     {
+        private const string wmiNamespace = @"root\cimv2";
         public string getSystemDrive()
         {
             string systemDrive = null;
-            DriveInfo[] allDrives = getAllLocalDrives();
-            foreach(DriveInfo singleDrive in allDrives)
+            DriveInfo[] allVolumes = getAllLocalVolumes();
+            foreach(DriveInfo singleVolume in allVolumes)
             {
-                if (hasWindowsFolder(singleDrive))
+                if (hasWindowsFolder(singleVolume))
                 {
-                    systemDrive = singleDrive.Name;
+                    systemDrive = singleVolume.Name;
                     break;
                 }
             }
             return systemDrive;
         }
 
-        private DriveInfo[] getAllLocalDrives()
+        private DriveInfo[] getAllLocalVolumes()
         {
             List<DriveInfo> allLocalDrives = new List<DriveInfo>();
             DriveInfo[] allDrives = DriveInfo.GetDrives();
