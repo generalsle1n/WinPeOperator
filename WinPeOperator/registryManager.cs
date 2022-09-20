@@ -15,7 +15,6 @@ namespace WinPeOperator
         private const string keyPath = @"ControlSet001\Control\ComputerName\ComputerName";
         public registryManager(string systemDrive)
         {
-            //this.systemDrive = systemDrive;
             this.systemDrive = systemDrive;
         }
 

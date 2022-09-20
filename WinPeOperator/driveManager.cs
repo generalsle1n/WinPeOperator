@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Management;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +13,7 @@ namespace WinPeOperator
     internal class driveManager
     {
         private const string wmiNamespace = @"root\cimv2";
+        private const string diskpartScriptName = "WinPeOperator.diskpartScript.txt";
         public string getSystemDrive()
         {
             string systemDrive = null;
@@ -54,15 +57,32 @@ namespace WinPeOperator
                 return false;
             }
         }
-
-        public bool wipeLocalDrives()
+        private string createTempDiskPartFile()
         {
-            string currentPath = Path.GetDirectoryName(Environment.ProcessPath) + @"\diskpartScript.txt";
+            Assembly current = Assembly.GetExecutingAssembly();
+            string tempFilePath = null;
+            
+            using (Stream rawScriptStream = current.GetManifestResourceStream(diskpartScriptName))
+            {
+                tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+                using (FileStream fileStream = new FileStream(tempFilePath, FileMode.Create))
+                {
+                    rawScriptStream.CopyTo(fileStream);
+                }
+            }
+            
+            return tempFilePath;
+        }
+
+        public void wipeLocalDrives()
+        {
+            string currentPath = createTempDiskPartFile();
+            Console.WriteLine(Path.GetTempPath());
             Process diskpart = new Process()
             {
                 StartInfo = new ProcessStartInfo("diskpart.exe")
                 {
-                    CreateNoWindow = true,
+                    CreateNoWindow = false,
                     WindowStyle = ProcessWindowStyle.Normal,
                     Arguments = $"/s {currentPath}"
                 }
@@ -70,8 +90,6 @@ namespace WinPeOperator
 
             diskpart.Start();
             diskpart.WaitForExit();
-
-            return true;
         }
     }
 }
