@@ -57,14 +57,14 @@ namespace WinPeOperator
 
         public bool wipeLocalDrives()
         {
-            string a = Environment.CurrentDirectory + @"\diskpartScript.txt";
+            string currentPath = Path.GetDirectoryName(Environment.ProcessPath) + @"\diskpartScript.txt";
             Process diskpart = new Process()
             {
                 StartInfo = new ProcessStartInfo("diskpart.exe")
                 {
-                    CreateNoWindow = false,
+                    CreateNoWindow = true,
                     WindowStyle = ProcessWindowStyle.Normal,
-                    Arguments = $"/s {a}"
+                    Arguments = $"/s {currentPath}"
                 }
             };
 

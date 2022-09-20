@@ -31,8 +31,6 @@ wipeDiskCommand.SetHandler(() =>
 {
     driveManager drive = new driveManager();
     drive.wipeLocalDrives();
-
-
 });
 
 rootCommand.Add(wipeDiskCommand);
