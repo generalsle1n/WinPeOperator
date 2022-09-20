@@ -11,7 +11,7 @@ namespace WinPeOperator
     internal class registryManager
     {
         private string systemDrive;
-        private const string registryPath = @"\Windows\System32\config\SYSTEM";
+        private const string registryPath = @"Windows\System32\config\SYSTEM";
         private const string keyPath = @"ControlSet001\Control\ComputerName\ComputerName";
         public registryManager(string systemDrive)
         {
@@ -41,10 +41,12 @@ namespace WinPeOperator
             catch (FileNotFoundException error)
             {
                 Console.WriteLine($"The file is not found: {registryEndPath}");
+                return null;
             }
             catch (IOException error)
             {
                 Console.WriteLine($"There is an IO Error, this is common, when the file is already in use");
+                return null;
             }
 
             RegistryKey keys = hive.GetKey(keyPath);

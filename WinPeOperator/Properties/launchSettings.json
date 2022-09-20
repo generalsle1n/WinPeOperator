@@ -2,7 +2,7 @@
   "profiles": {
     "WinPeOperator": {
       "commandName": "Project",
-      "commandLineArgs": "--GetHostName --RegistryPath C:\\temp\\SYSTEM"
+      "commandLineArgs": "--GetHostName"
     }
   }
 }

@@ -10,12 +10,17 @@ namespace WinPeOperator
     {
         public string getSystemDrive()
         {
-            var lol = getAllLocalDrives();
-            foreach(DriveInfo a in lol)
+            string systemDrive = null;
+            DriveInfo[] allDrives = getAllLocalDrives();
+            foreach(DriveInfo singleDrive in allDrives)
             {
-                Console.WriteLine($"{a.Name}: " + hasWindowsFolder(a));
+                if (hasWindowsFolder(singleDrive))
+                {
+                    systemDrive = singleDrive.Name;
+                    break;
+                }
             }
-            return "";
+            return systemDrive;
         }
 
         private DriveInfo[] getAllLocalDrives()
@@ -36,7 +41,7 @@ namespace WinPeOperator
 
         private bool hasWindowsFolder(DriveInfo info)
         {
-            bool folderExists = Directory.Exists($@"{info.Name}Windows\System32\");
+            bool folderExists = File.Exists($@"{info.Name}Windows\System32\ntoskrnl.exe");
             if(folderExists == true)
             {
                 return true;
