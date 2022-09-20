@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Text;
@@ -43,7 +44,7 @@ namespace WinPeOperator
 
         private bool hasWindowsFolder(DriveInfo info)
         {
-            bool folderExists = File.Exists($@"{info.Name}Windows\System32\ntoskrnl.exe");
+            bool folderExists = File.Exists($@"{info.Name}Windows\System32\mmc.exe");
             if(folderExists == true)
             {
                 return true;
@@ -52,6 +53,25 @@ namespace WinPeOperator
             {
                 return false;
             }
+        }
+
+        public bool wipeLocalDrives()
+        {
+            string a = Environment.CurrentDirectory + @"\diskpartScript.txt";
+            Process diskpart = new Process()
+            {
+                StartInfo = new ProcessStartInfo("diskpart.exe")
+                {
+                    CreateNoWindow = false,
+                    WindowStyle = ProcessWindowStyle.Normal,
+                    Arguments = $"/s {a}"
+                }
+            };
+
+            diskpart.Start();
+            diskpart.WaitForExit();
+
+            return true;
         }
     }
 }

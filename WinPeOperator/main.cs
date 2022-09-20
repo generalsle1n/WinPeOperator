@@ -24,6 +24,17 @@ getHostNameCommand.SetHandler((alternativePath) =>
 
 rootCommand.Add(getHostNameCommand);
 
-//Drivecommand
+//WipeCommand
+Command wipeDiskCommand = new Command(name: "--WipeDisk", description: "Wipes all local Disks");
+
+wipeDiskCommand.SetHandler(() =>
+{
+    driveManager drive = new driveManager();
+    drive.wipeLocalDrives();
+
+
+});
+
+rootCommand.Add(wipeDiskCommand);
 
 rootCommand.Invoke(args);
