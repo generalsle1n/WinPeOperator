@@ -1,6 +1,6 @@
 # WinPeOperator
 
-##Build Settings:
+## Build Settings:
 Publish Profile: Folder
 Config: Release
 Framework: .Net 6
