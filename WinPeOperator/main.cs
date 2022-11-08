@@ -100,4 +100,19 @@ LdapDelete.Add(LdapDeleteDomain);
 LdapDelete.Add(LdapDeletePort);
 LdapDelete.Add(LdapDeleteUserName);
 LdapDelete.Add(LdapDeleteUserPassword);
+LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassword) =>
+{
+    driveManager drive = new driveManager();
+    string systemDrive = drive.getSystemDrive();
+    registryManager reg = new registryManager(systemDrive);
+    string hostname = reg.getHostnameFromRegistry();
+    LdapManager Manager = new LdapManager()
+    {
+        DomainName = variableDomain,
+        Port = int.Parse(variablePort),
+        UserName = variableUser,
+        Password = variablePassword
+    };
+    Manager.deleteComputerObject(hostname);
+}, LdapDeleteDomain, LdapDeletePort, LdapDeleteUserName, LdapDeleteUserPassword);
 rootCommand.Invoke(args);
