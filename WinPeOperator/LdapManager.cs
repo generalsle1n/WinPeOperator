@@ -31,8 +31,8 @@ namespace WinPeOperator
                     };
                     _ldap.Connect(DomainName, Port);
                     _ldap.Bind(Native.LdapAuthType.Simple, _cred);
-                    List<LdapEntry> result = _ldap.SearchByCn(ComputerName).ToList();
-                    _ldap.Delete(result[0].Dn);
+                    LdapEntry search = _ldap.Search(Searchbase, $"(&(objectCategory=computer)(name={ComputerName}))")[0];
+                    _ldap.Delete(search.Dn);
                 }
                 catch
                 {
