@@ -77,4 +77,27 @@ tsEnvSet.SetHandler((variableName, variableValue) =>
 
 rootCommand.Add(tsEnvSet);
 
+//LdapHandler
+Command LdapDelete = new Command(name: "--DeleteLdapComputer", description: "Delete Ldap Computer Object");
+Option<string> LdapDeleteDomain = new Option<string>(name: "--Domain", description: "Enter the Domain Name")
+{
+    IsRequired = true,
+};
+Option<string> LdapDeletePort = new Option<string>(name: "--Port", description: "Enter the Network Port")
+{
+    IsRequired = true,
+};
+Option<string> LdapDeleteUserName = new Option<string>(name: "--User", description: "Enter the User Name")
+{
+    IsRequired = true,
+};
+Option<string> LdapDeleteUserPassword = new Option<string>(name: "--Password", description: "Enter the Password Name")
+{
+    IsRequired = true,
+};
+
+LdapDelete.Add(LdapDeleteDomain);
+LdapDelete.Add(LdapDeletePort);
+LdapDelete.Add(LdapDeleteUserName);
+LdapDelete.Add(LdapDeleteUserPassword);
 rootCommand.Invoke(args);
