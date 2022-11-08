@@ -50,7 +50,7 @@ tsEnvGet.SetHandler((variable) =>
     string value = ts.getTSVariableData(variable);
     Console.WriteLine(value);
 
-},tsEnvGetName);
+}, tsEnvGetName);
 
 rootCommand.Add(tsEnvGet);
 
