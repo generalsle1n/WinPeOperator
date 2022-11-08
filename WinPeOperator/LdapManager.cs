@@ -14,6 +14,7 @@ namespace WinPeOperator
         public int Port { get; init; }
         public string UserName { get; init; }
         public string Password { get; init; }
+        public string Searchbase { get; init; }
         private LdapConnection _ldap;
 
         public bool deleteComputerObject(string ComputerName)
