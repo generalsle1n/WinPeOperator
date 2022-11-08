@@ -115,4 +115,7 @@ LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassw
     };
     Manager.deleteComputerObject(hostname);
 }, LdapDeleteDomain, LdapDeletePort, LdapDeleteUserName, LdapDeleteUserPassword);
+
+rootCommand.Add(LdapDelete);
+
 rootCommand.Invoke(args);
