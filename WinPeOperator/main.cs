@@ -100,6 +100,7 @@ LdapDelete.Add(LdapDeleteDomain);
 LdapDelete.Add(LdapDeletePort);
 LdapDelete.Add(LdapDeleteUserName);
 LdapDelete.Add(LdapDeleteUserPassword);
+
 LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassword) =>
 {
     driveManager drive = new driveManager();
