@@ -19,7 +19,7 @@ namespace WinPeOperator
 
         public bool deleteComputerObject(string ComputerName)
         {
-            bool success = true;
+            string result = "Success";
             using(_ldap = new LdapConnection())
             {
                 try
@@ -36,11 +36,11 @@ namespace WinPeOperator
                 }
                 catch
                 {
-                    success = false;
+                    result = "The computer cannot be found or not be deleted";
                 }
                 
             }
-            return success;
+            return result;
         }
     }
 }
