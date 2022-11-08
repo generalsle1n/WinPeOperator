@@ -95,13 +95,17 @@ Option<string> LdapDeleteUserPassword = new Option<string>(name: "--Password", d
 {
     IsRequired = true,
 };
-
+Option<string> LdapDeleteSearchbase = new Option<string>(name: "--SearchBase", description: "Enter the Ldap Searchbase")
+{
+    IsRequired = true,
+};
 LdapDelete.Add(LdapDeleteDomain);
 LdapDelete.Add(LdapDeletePort);
 LdapDelete.Add(LdapDeleteUserName);
 LdapDelete.Add(LdapDeleteUserPassword);
+LdapDelete.Add(LdapDeleteSearchbase);
 
-LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassword) =>
+LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassword, varibaleSearchBase) =>
 {
     driveManager drive = new driveManager();
     string systemDrive = drive.getSystemDrive();
@@ -116,6 +120,7 @@ LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassw
     };
     Manager.deleteComputerObject(hostname);
 }, LdapDeleteDomain, LdapDeletePort, LdapDeleteUserName, LdapDeleteUserPassword);
+}, LdapDeleteDomain, LdapDeletePort, LdapDeleteUserName, LdapDeleteUserPassword, LdapDeleteSearchbase);
 
 rootCommand.Add(LdapDelete);
 
