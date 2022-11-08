@@ -37,7 +37,7 @@ namespace WinPeOperator
                 {
                     result = "The computer cannot be found or not be deleted";
                 }
-                
+
             }
             return result;
         }
