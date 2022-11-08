@@ -110,7 +110,8 @@ LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassw
     driveManager drive = new driveManager();
     string systemDrive = drive.getSystemDrive();
     registryManager reg = new registryManager(systemDrive);
-    string hostname = reg.getHostnameFromRegistry();
+    string hostname = reg.getHostnameFromRegistry(null);
+
     LdapManager Manager = new LdapManager()
     {
         DomainName = variableDomain,
