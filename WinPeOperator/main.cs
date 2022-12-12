@@ -132,6 +132,7 @@ Command vncServerStart = new Command(name: "--StartVNCServer", description: "Sta
 vncServerStart.SetHandler(() =>
 {
     VNCManager _vnc = new VNCManager();
+    _vnc.StartVNCServer();
 });
 
 rootCommand.Add(vncServerStart);
