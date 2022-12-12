@@ -13,7 +13,7 @@ namespace WinPeOperator
     internal class driveManager
     {
         private const string wmiNamespace = @"root\cimv2";
-        private const string diskpartScriptName = "WinPeOperator.diskpartScript.txt";
+        private const string diskpartScriptName = "WinPeOperator.Resources.diskpartScript.txt";
         public string getSystemDrive()
         {
             string systemDrive = null;
@@ -77,7 +77,7 @@ namespace WinPeOperator
         public void wipeLocalDrives()
         {
             string currentPath = createTempDiskPartFile();
-            Console.WriteLine(Path.GetTempPath());
+
             Process diskpart = new Process()
             {
                 StartInfo = new ProcessStartInfo("diskpart.exe")
