@@ -10,12 +10,16 @@
 
   <ItemGroup>
     <None Remove="diskpartScript.txt" />
+    <None Remove="Resources\Vnc\ultravnc.ini" />
+    <None Remove="Resources\Vnc\uvnc_settings.exe" />
+    <None Remove="Resources\Vnc\winvnc.exe" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="diskpartScript.txt">
+    <EmbeddedResource Include="Resources\diskpartScript.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Vnc\winvnc.exe" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +37,10 @@
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Vnc\ultravnc.ini" />
   </ItemGroup>
 
 </Project>
