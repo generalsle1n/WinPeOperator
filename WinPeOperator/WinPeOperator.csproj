@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="diskpartScript.txt">
+    <EmbeddedResource Include="Resources\diskpartScript.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
