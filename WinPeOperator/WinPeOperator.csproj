@@ -19,7 +19,6 @@
     <EmbeddedResource Include="Resources\diskpartScript.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\vnc\uvnc_settings.exe" />
     <EmbeddedResource Include="Resources\vnc\winvnc.exe" />
   </ItemGroup>
 
