@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinPeOperator
 {
-    internal class rdpManager
+    internal class VNCManager
     {
     }
 }
