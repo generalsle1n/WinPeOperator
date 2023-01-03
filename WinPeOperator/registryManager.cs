@@ -47,13 +47,17 @@ namespace WinPeOperator
 
             return registryEndPath;
         }
+
+        private RegistryHiveOnDemand TryLoadRegistry(string Path)
+        {
+            RegistryHiveOnDemand hive = null;
             try
             {
-                hive = new RegistryHiveOnDemand(registryEndPath);
+                hive = new RegistryHiveOnDemand(Path);
             }
             catch (FileNotFoundException error)
             {
-                Console.WriteLine($"The file is not found: {registryEndPath}");
+                Console.WriteLine($"The file is not found: {Path}");
                 return null;
             }
             catch (IOException error)
@@ -62,7 +66,8 @@ namespace WinPeOperator
                 return null;
             }
 
-            RegistryKey keys = hive.GetKey(keyPath);
+            return hive;
+        }
 
             if (keys == null)
             {
