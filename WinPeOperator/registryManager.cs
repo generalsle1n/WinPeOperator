@@ -64,7 +64,7 @@ namespace WinPeOperator
             return hive;
         }
 
-        public string getHostnameFromRegistry(string alternativePath = "")
+        public string GetHostnameFromRegistry(string alternativePath = "")
         {
             string computerName = null;
             string registryEndPath = GenerateRegistryPath(RegistryHive.SYSTEM ,alternativePath);
