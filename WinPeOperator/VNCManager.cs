@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Sockets;
@@ -34,7 +32,7 @@ namespace WinPeOperator
             driveManager drive = new driveManager();
             string systemDrive = drive.getSystemDrive();
             registryManager reg = new registryManager(systemDrive);
-            string hostname = reg.getHostnameFromRegistry(null);
+            string hostname = reg.GetHostnameFromRegistry(null);
 
             string emailBody = $"<p>An VNC Server was started via Tasksequence with the follwing Data:</p>" +
                 Environment.NewLine +
