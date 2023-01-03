@@ -69,6 +69,15 @@ namespace WinPeOperator
             return hive;
         }
 
+        public string getHostnameFromRegistry(string alternativePath = "")
+        {
+            string computerName = null;
+            string registryEndPath = GenerateRegistryPath(RegistryHive.SYSTEM ,alternativePath);
+            RegistryHiveOnDemand hive = TryLoadRegistry(registryEndPath);
+            if(hive != null)
+            {
+                RegistryKey keys = hive.GetKey(_nameKeyPath);
+
             if (keys == null)
             {
                 Console.WriteLine("There are no Keys found");
