@@ -73,16 +73,16 @@ namespace WinPeOperator
             {
                 RegistryKey keys = hive.GetKey(_nameKeyPath);
 
-            if (keys == null)
-            {
-                Console.WriteLine("There are no Keys found");
-            }
-            else
-            {
+                if (keys == null)
+                {
+                    Console.WriteLine("There are no Keys found");
+                }
+                else
+                {
                     computerName = keys.Values.Find(reg => reg.ValueName.Equals("ComputerName")).ValueData;
                 }
             }
-
+            
             return computerName;
         }
 
