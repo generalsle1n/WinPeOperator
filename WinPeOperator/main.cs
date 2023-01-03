@@ -1,8 +1,5 @@
 ﻿using WinPeOperator;
 using System.CommandLine;
-using System.Dynamic;
-using System.CommandLine.Invocation;
-using System.CommandLine.NamingConventionBinder;
 
 RootCommand rootCommand = new RootCommand();
 
