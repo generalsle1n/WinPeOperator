@@ -20,9 +20,22 @@ namespace WinPeOperator
             _systemDrive = systemDrive;
         }
 
-        public string getHostnameFromRegistry(string alternativePath = "")
+        private string GenerateRegistryPath(RegistryHive Hive, string alternativePath = "")
         {
             string registryEndPath;
+
+            string hivePath = "";
+
+            switch (Hive)
+            {
+                case RegistryHive.SYSTEM:
+                    hivePath = _systemRegistryPath;
+                    break;
+                case RegistryHive.SOFTWARE:
+                    hivePath = _softwareRegistryPath;
+                    break;
+            }
+
             if (alternativePath == null)
             {
                 registryEndPath = _systemDrive + hivePath;
@@ -32,6 +45,8 @@ namespace WinPeOperator
                 registryEndPath = alternativePath;
             }
 
+            return registryEndPath;
+        }
             try
             {
                 hive = new RegistryHiveOnDemand(registryEndPath);
