@@ -85,5 +85,31 @@ namespace WinPeOperator
 
             return computerName;
         }
+
+        public bool CheckIfADAndComputerSIDAreSame(string ComputerSID, string alternativePath = null)
+        {
+            string registryEndPath = GenerateRegistryPath(RegistryHive.SOFTWARE, alternativePath);
+            Console.WriteLine($"Try Load Regirtys from {registryEndPath}");
+            RegistryHiveOnDemand hive = TryLoadRegistry(registryEndPath);
+
+            RegistryKey allKeys = hive.GetKey(_sidKeyPath);
+
+            KeyValue regval = allKeys.Values.Find(reg => reg.ValueData.Equals(ComputerSID));
+
+            if (regval != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private enum RegistryHive
+        {
+            SYSTEM,
+            SOFTWARE
+        }
     }
 }
