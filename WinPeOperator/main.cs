@@ -14,7 +14,7 @@ getHostNameCommand.SetHandler((alternativePath) =>
     driveManager drive = new driveManager();
     string systemDrive = drive.getSystemDrive();
     registryManager reg = new registryManager(systemDrive);
-    string hostname = reg.getHostnameFromRegistry(alternativePath);
+    string hostname = reg.GetHostnameFromRegistry(alternativePath);
     Console.WriteLine(hostname);
 }, getHostNamePathOption);
 
@@ -107,7 +107,7 @@ LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassw
     driveManager drive = new driveManager();
     string systemDrive = drive.getSystemDrive();
     registryManager reg = new registryManager(systemDrive);
-    string hostname = reg.getHostnameFromRegistry(null);
+    string hostname = reg.GetHostnameFromRegistry(null);
 
     LdapManager Manager = new LdapManager()
     {
@@ -118,7 +118,11 @@ LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassw
         Searchbase = varibaleSearchBase
     };
 
-    Console.WriteLine(Manager.deleteComputerObject(hostname));
+    string computerSID = Manager.GetComputerSID(hostname);
+    if(reg.CheckIfADAndComputerSIDAreSame(computerSID, hostname))
+    {
+        Console.WriteLine(Manager.DeleteComputerObject(hostname));
+    } 
 
 }, LdapDeleteDomain, LdapDeletePort, LdapDeleteUserName, LdapDeleteUserPassword, LdapDeleteSearchbase);
 
