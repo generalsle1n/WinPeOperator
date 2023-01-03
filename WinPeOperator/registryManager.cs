@@ -10,12 +10,14 @@ namespace WinPeOperator
 {
     internal class registryManager
     {
-        private string systemDrive;
-        private const string registryPath = @"Windows\System32\config\SYSTEM";
-        private const string keyPath = @"ControlSet001\Control\ComputerName\ComputerName";
+        private string _systemDrive;
+        private const string _systemRegistryPath = @"Windows\System32\config\SYSTEM";
+        private const string _softwareRegistryPath = @"Windows\System32\config\SOFTWARE";
+        private const string _nameKeyPath = @"ControlSet001\Control\ComputerName\ComputerName";
+        private const string _sidKeyPath = @"Microsoft\Windows\CurrentVersion\Group Policy\GroupMembership";
         public registryManager(string systemDrive)
         {
-            this.systemDrive = systemDrive;
+            _systemDrive = systemDrive;
         }
 
         public string getHostnameFromRegistry(string alternativePath = "")
@@ -26,7 +28,7 @@ namespace WinPeOperator
             string registryEndPath;
             if (alternativePath == null)
             {
-                registryEndPath = systemDrive + registryPath;
+                registryEndPath = _systemDrive + hivePath;
             }
             else
             {
