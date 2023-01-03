@@ -22,9 +22,6 @@ namespace WinPeOperator
 
         public string getHostnameFromRegistry(string alternativePath = "")
         {
-            RegistryHiveOnDemand hive = null;
-            List<KeyValue> allValues = null;
-            string computerName = null;
             string registryEndPath;
             if (alternativePath == null)
             {
@@ -58,14 +55,7 @@ namespace WinPeOperator
             }
             else
             {
-                allValues = keys.Values.ToList<KeyValue>();
-            }
-            foreach (KeyValue single in allValues)
-            {
-                if (single.ValueName.Equals("ComputerName"))
-                {
-                    computerName = single.ValueData;
-                    break;
+                    computerName = keys.Values.Find(reg => reg.ValueName.Equals("ComputerName")).ValueData;
                 }
             }
 
