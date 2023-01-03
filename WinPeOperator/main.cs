@@ -120,6 +120,8 @@ LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassw
 
     string computerSID = Manager.GetComputerSID(hostname);
     if(reg.CheckIfADAndComputerSIDAreSame(computerSID, hostname))
+
+    if(reg.CheckIfADAndComputerSIDAreSame(computerSID))
     {
         Console.WriteLine(Manager.DeleteComputerObject(hostname));
     } 
