@@ -16,7 +16,7 @@ namespace WinPeOperator
         public string Password { get; init; }
         public string Searchbase { get; init; }
         private LdapConnection _ldap;
-        public string deleteComputerObject(string ComputerName)
+        public string DeleteComputerObject(string ComputerName)
         {
             string result = "Success";
             using(_ldap = new LdapConnection())
