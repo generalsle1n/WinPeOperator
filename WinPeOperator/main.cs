@@ -128,7 +128,7 @@ LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassw
     if (reg.CheckIfADAndComputerSIDAreSame(computerSID) || variableForceDelete)
     {
         Console.WriteLine(Manager.DeleteComputerObject(hostname));
-    } 
+    }
 
 }, LdapDeleteDomain, LdapDeletePort, LdapDeleteUserName, LdapDeleteUserPassword, LdapDeleteSearchbase, LdapForceDelete);
 
