@@ -96,13 +96,18 @@ Option<string> LdapDeleteSearchbase = new Option<string>(name: "--SearchBase", d
 {
     IsRequired = true,
 };
+Option<bool> LdapForceDelete= new Option<bool>(name: "--Force", description: "Force to delete AD Object when SID are not Equal")
+{
+    IsRequired = false,
+};
 LdapDelete.Add(LdapDeleteDomain);
 LdapDelete.Add(LdapDeletePort);
 LdapDelete.Add(LdapDeleteUserName);
 LdapDelete.Add(LdapDeleteUserPassword);
 LdapDelete.Add(LdapDeleteSearchbase);
+LdapDelete.Add(LdapForceDelete);
 
-LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassword, varibaleSearchBase) =>
+LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassword, varibaleSearchBase, variableForceDelete) =>
 {
     driveManager drive = new driveManager();
     string systemDrive = drive.getSystemDrive();
@@ -121,12 +126,12 @@ LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassw
     string computerSID = Manager.GetComputerSID(hostname);
     if(reg.CheckIfADAndComputerSIDAreSame(computerSID, hostname))
 
-    if(reg.CheckIfADAndComputerSIDAreSame(computerSID))
+    if (reg.CheckIfADAndComputerSIDAreSame(computerSID) || variableForceDelete)
     {
         Console.WriteLine(Manager.DeleteComputerObject(hostname));
     } 
 
-}, LdapDeleteDomain, LdapDeletePort, LdapDeleteUserName, LdapDeleteUserPassword, LdapDeleteSearchbase);
+}, LdapDeleteDomain, LdapDeletePort, LdapDeleteUserName, LdapDeleteUserPassword, LdapDeleteSearchbase, LdapForceDelete);
 
 //VNCServer
 
