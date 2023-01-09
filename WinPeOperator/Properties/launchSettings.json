@@ -1,8 +1,7 @@
 {
   "profiles": {
     "WinPeOperator": {
-      "commandName": "Project",
-      "commandLineArgs": "--tsVar"
+      "commandName": "Project"
     }
   }
 }
