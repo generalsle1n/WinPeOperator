@@ -32,15 +32,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="TSEnvironmentLib">
-      <HintPath>..\..\..\..\..\..\..\..\temp\TSEnvironmentLib.dll</HintPath>
-      <Private>True</Private>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
+    <EmbeddedResource Include="Resources\Vnc\ultravnc.ini" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Vnc\ultravnc.ini" />
+    <Reference Include="TSEnvironmentLib">
+      <HintPath>..\..\..\..\..\..\temp\TsEnvironmentLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
