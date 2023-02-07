@@ -167,11 +167,11 @@ PackageInstall.SetHandler((variableWindowsOfflinePath, variableSourcePath) =>
     }
 
     PackageManager pkg = new PackageManager()
-{
+    {
         WindowsPath = variableWindowsOfflinePath
     };
     pkg.InstallSinglePackage(variableSourcePath);
-    
+
 }, WindowsOffline, SourcePath);
 
 rootCommand.Add(PackageInstall);
