@@ -131,11 +131,10 @@ LdapDelete.SetHandler((variableDomain, variablePort, variableUser, variablePassw
     }
 
 }, LdapDeleteDomain, LdapDeletePort, LdapDeleteUserName, LdapDeleteUserPassword, LdapDeleteSearchbase, LdapForceDelete);
+rootCommand.Add(LdapDelete);
 
 //VNCServer
-
 Command vncServerStart = new Command(name: "--StartVNCServer", description: "Start an local VNC Server");
-
 vncServerStart.SetHandler(() =>
 {
     VNCManager _vnc = new VNCManager();
