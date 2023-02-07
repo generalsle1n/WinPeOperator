@@ -11,6 +11,7 @@ namespace WinPeOperator
     {
         private bool _alreadyInitialzed = false;
         private DismLogLevel _dismLogLevel = DismLogLevel.LogErrors;
+        internal string WindowsPath { get; init; }
         private void InitClass()
         {
             if (!_alreadyInitialzed)
@@ -19,10 +20,26 @@ namespace WinPeOperator
                 _alreadyInitialzed = true;
             }
         }
-        public void InstallDotNetThree()
+
+        private void Dispose()
         {
-            if
-            DismApi.Initialize(DismLogLevel.LogErrors);
+            if (_alreadyInitialzed)
+            {
+                DismApi.Shutdown();
+                _alreadyInitialzed = false;
+            }
+        }
+
+        public void InstallSinglePackage(string PackagePath)
+        {
+            InitClass();
+
+            using (DismSession session = DismApi.OpenOfflineSession(WindowsPath))
+            {
+                DismApi.AddPackage(session, PackagePath, false, false);
+            }
+
+            Dispose();
         }
     }
 }
