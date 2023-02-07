@@ -143,17 +143,37 @@ vncServerStart.SetHandler(() =>
 
 rootCommand.Add(vncServerStart);
 
-//Install DotNet3.5
-Command DotNetThree = new Command(name: "--InstallDotNetThree", description: "Install .Net 3.5 to an Online Windows");
-Option<string> SourcePath = new Option<string>(name: "--Path", description: "Enter the UNC Path to the SourcePath")
+//Install Packages
+Command PackageInstall = new Command(name: "--InstallPackage", description: "Install .CAB/.MSU to Offline Windows");
+Option<string> SourcePath = new Option<string>(name: "--PackagePath", description: "Enter the Path to the Package")
 {
     IsRequired = true
 };
-DotNetThree.SetHandler(() =>
+Option<string> WindowsOffline = new Option<string>(name: "--WindowsPath", description: @"Enter the WindowsPath. eg. C: instead of C:\, when not specified, it gets read from task sequence")
 {
-    
-});
+    IsRequired = false
+};
 
-rootCommand.Add(DotNetThree);
+
+PackageInstall.Add(WindowsOffline);
+PackageInstall.Add(SourcePath);
+
+PackageInstall.SetHandler((variableWindowsOfflinePath, variableSourcePath) =>
+{
+    if(variableWindowsOfflinePath == null)
+    {
+        tsManager ts = new tsManager();
+        variableWindowsOfflinePath = ts.getTSVariableData("OSDisk");
+    }
+
+    PackageManager pkg = new PackageManager()
+{
+        WindowsPath = variableWindowsOfflinePath
+    };
+    pkg.InstallSinglePackage(variableSourcePath);
+    
+}, WindowsOffline, SourcePath);
+
+rootCommand.Add(PackageInstall);
 
 rootCommand.Invoke(args);
