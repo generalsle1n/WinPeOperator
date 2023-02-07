@@ -143,6 +143,17 @@ vncServerStart.SetHandler(() =>
 
 rootCommand.Add(vncServerStart);
 
-rootCommand.Add(LdapDelete);
+//Install DotNet3.5
+Command DotNetThree = new Command(name: "--InstallDotNetThree", description: "Install .Net 3.5 to an Online Windows");
+Option<string> SourcePath = new Option<string>(name: "--Path", description: "Enter the UNC Path to the SourcePath")
+{
+    IsRequired = true
+};
+DotNetThree.SetHandler(() =>
+{
+    
+});
+
+rootCommand.Add(DotNetThree);
 
 rootCommand.Invoke(args);
