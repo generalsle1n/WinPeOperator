@@ -25,8 +25,14 @@ Command wipeDiskCommand = new Command(name: "--WipeDisk", description: "Wipes al
 
 wipeDiskCommand.SetHandler(() =>
 {
+    int WipeCount = 2;
+    int WipeCurrentCount = 0;
     driveManager drive = new driveManager();
+    while(WipeCurrentCount < WipeCount)
+    {
     drive.wipeLocalDrives();
+        WipeCurrentCount++;
+    }
 });
 
 rootCommand.Add(wipeDiskCommand);
