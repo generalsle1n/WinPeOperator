@@ -22,18 +22,27 @@ rootCommand.Add(getHostNameCommand);
 
 //WipeCommand
 Command wipeDiskCommand = new Command(name: "--WipeDisk", description: "Wipes all local Disks");
+Option<string> getSmtpServer = new Option<string>(name: "--SMTPServer", description: "Specify the SMTP Server");
+Option<string> ToAdress = new Option<string>(name: "--Address", description: "Specify the Mail address where the certificate should be send");
 
-wipeDiskCommand.SetHandler(() =>
+wipeDiskCommand.Add(getSmtpServer);
+wipeDiskCommand.Add(ToAdress);
+
+wipeDiskCommand.SetHandler((smtpserver, toadress) =>
 {
     int WipeCount = 2;
     int WipeCurrentCount = 0;
     driveManager drive = new driveManager();
-    while(WipeCurrentCount < WipeCount)
+    string SystemDrive = drive.getSystemDrive();
+    registryManager rManager = new registryManager(SystemDrive);
+    string HostName = rManager.GetHostnameFromRegistry(null);
+    while (WipeCurrentCount < WipeCount)
     {
-    drive.wipeLocalDrives();
+        drive.wipeLocalDrives();
         WipeCurrentCount++;
     }
-});
+    drive.CreateCertificate(rManager.GetHostnameFromRegistry(), smtpserver, toadress);
+}, getSmtpServer, ToAdress);
 
 rootCommand.Add(wipeDiskCommand);
 
