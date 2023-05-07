@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="diskpartScript.txt" />
+    <None Remove="Main" />
     <None Remove="Resources\Vnc\ultravnc.ini" />
     <None Remove="Resources\Vnc\uvnc_settings.exe" />
     <None Remove="Resources\Vnc\winvnc.exe" />
