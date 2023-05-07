@@ -135,11 +135,32 @@ rootCommand.Add(LdapDelete);
 
 //VNCServer
 Command vncServerStart = new Command(name: "--StartVNCServer", description: "Start an local VNC Server");
-vncServerStart.SetHandler(() =>
+Option<string> VNCSmtpServer = new Option<string>(name: "--SMTPServer", description: "Enter the Smtp Server Name")
 {
-    VNCManager _vnc = new VNCManager();
+    IsRequired = true,
+};
+Option<string> VNCMailDestinatation= new Option<string>(name: "--DestinationMail", description: "Enter the Mail where the status mail should be send")
+{
+    IsRequired = true,
+};
+Option<string> VNCMailSource = new Option<string>(name: "--SourceMail", description: "Enter the Mail which should be used to send")
+{
+    IsRequired = true,
+};
+
+vncServerStart.AddOption(VNCSmtpServer);
+vncServerStart.AddOption(VNCMailDestinatation);
+vncServerStart.AddOption(VNCMailSource);
+vncServerStart.SetHandler((smtpserver, maildestination, mailsource) =>
+{
+    VNCManager _vnc = new VNCManager()
+{
+        _itMail = maildestination,
+        _senderMail = mailsource,
+        _smtpServer = smtpserver
+    };
     _vnc.StartVNCServer();
-});
+}, VNCSmtpServer, VNCMailDestinatation, VNCMailSource);
 
 rootCommand.Add(vncServerStart);
 
