@@ -137,8 +137,8 @@ namespace WinPeOperator
                                 count++;
                             }
 
-                            text.Span("Hiermit wird bestätigt das dass oben stehende Gerät sicher und unwiederuflich gelöscht wurde" + Environment.NewLine);
-                            text.Span("Die Zerstörung der Daten ist nur elektronisch erfolgt, die Hardware kann sofern benötigt weiterverwendet werden" + Environment.NewLine);
+                            text.Span("Hiermit wird bestätigt, dass das oben stehende Gerät sicher und unwiderruflich gelöscht wurde" + Environment.NewLine);
+                            text.Span("Die Zerstörung der Daten ist nur elektronisch erfolgt, die Hardware kann, sofern benötigt, weiterverwendet werden" + Environment.NewLine);
 
                             for(int i = 0; i < 5; i++)
                             {
