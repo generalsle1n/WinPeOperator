@@ -9,7 +9,6 @@ namespace WinPeOperator
 {
     internal class driveManager
     {
-        private const string wmiNamespace = @"root\cimv2";
         private const string diskpartScriptName = "WinPeOperator.Resources.diskpartScript.txt";
         private const string wehrleLogo = "WinPeOperator.Resources.wehrleLogo.png";
         public string getSystemDrive()
