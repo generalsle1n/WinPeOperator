@@ -170,7 +170,6 @@ namespace WinPeOperator
         {
             using(SmtpClient Client = new SmtpClient(smtpserver, 25))
             {
-
                 MailMessage message = new MailMessage()
                 {
                     From = new MailAddress(fromMail),
