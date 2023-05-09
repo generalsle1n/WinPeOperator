@@ -170,12 +170,12 @@ namespace WinPeOperator
         {
             using(SmtpClient Client = new SmtpClient(smtpserver, 25))
             {
-                MailAddressCollection Destination = new MailAddressCollection();
-                Destination.Add(new MailAddress(toMail));
+
                 MailMessage message = new MailMessage()
                 {
                     From = new MailAddress(fromMail),
-                    Subject = "Wipe Certificate"
+                    Subject = "Wipe Certificate",
+                    Body = $"Dieses Gerät wurde gelöscht und wird wahrscheinlich verschrottet.{Environment.NewLine} Trage dieses Gerät ggfs. aus dem ERP aus."
                 };
                 message.To.Add(new MailAddress(toMail));
                 message.Attachments.Add(new Attachment(new MemoryStream(Attachment), "Certificate.pdf"));
