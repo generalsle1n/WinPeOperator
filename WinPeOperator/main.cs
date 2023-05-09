@@ -37,6 +37,7 @@ Option<string> FromAdress = new Option<string>(name: "--FromAddress", descriptio
 
 wipeDiskCommand.Add(getSmtpServer);
 wipeDiskCommand.Add(ToAdress);
+wipeDiskCommand.Add(FromAdress);
 
 wipeDiskCommand.SetHandler((smtpserver, toadress, fromadress) =>
 {
