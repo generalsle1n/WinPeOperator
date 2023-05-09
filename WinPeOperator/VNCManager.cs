@@ -13,6 +13,7 @@ namespace WinPeOperator
         private const string _vncConfig = "ultravnc.ini";
         private const string _wpeUtil = "wpeutil.exe";
         private const string _wpeUtilArguments = "DisableFirewall";
+
         internal string _smtpServer { get; init; }
         internal string _senderMail { get; init;}
         internal string _itMail { get; set; }
