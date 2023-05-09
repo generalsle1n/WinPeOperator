@@ -13,11 +13,12 @@ namespace WinPeOperator
         private const string _vncConfig = "ultravnc.ini";
         private const string _wpeUtil = "wpeutil.exe";
         private const string _wpeUtilArguments = "DisableFirewall";
-        private const string _smtpServer = "smtp.wehrle-werk.internal";
-        private const string _senderMail = "winpe@wehrle-werk.de";
-        private const string _itMail = "it@wehrle-werk.de";
 
-        private void SendMailToIT()
+        internal string _smtpServer { get; init; }
+        internal string _senderMail { get; init;}
+        internal string _itMail { get; set; }
+
+        private void SendMailToReceiver()
         {
             IPAddress[] localIPs = Dns.GetHostAddresses(Dns.GetHostName());
             string correctIP = "";
@@ -104,7 +105,7 @@ namespace WinPeOperator
                 }
             };
             vncserver.Start();
-            SendMailToIT();
+            SendMailToReceiver();
         }
     }
 }
