@@ -164,10 +164,10 @@ namespace WinPeOperator
                     });
                 });
             });
-            SendMailToIT(PDFFile.GeneratePdf(), SmtpServer, ToAddress);
+            SendMailToIT(PDFFile.GeneratePdf(), SmtpServer, ToAddress, FromMail);
         }
 
-        private void SendMailToIT(byte[] Attachment, string smtpserver, string toMail)
+        private void SendMailToIT(byte[] Attachment, string smtpserver, string toMail, string fromMail)
         {
             using(SmtpClient Client = new SmtpClient(smtpserver, 25))
             {
@@ -175,7 +175,7 @@ namespace WinPeOperator
                 Destination.Add(new MailAddress(toMail));
                 MailMessage message = new MailMessage()
                 {
-                    From = new MailAddress("wipe@wehrle-werk.internal"),
+                    From = new MailAddress(fromMail),
                     Subject = "Wipe Certificate"
                 };
                 message.To.Add(new MailAddress(toMail));
