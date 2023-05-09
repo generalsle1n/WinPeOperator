@@ -90,9 +90,11 @@ namespace WinPeOperator
             diskpart.WaitForExit();
         }
 
-        public void CreateCertificate(string HostName, string SmtpServer, string ToAddress)
+        public void CreateCertificate(string HostName, string SmtpServer, string ToAddress, string FromMail)
         {
             Stream Logo = Assembly.GetExecutingAssembly().GetManifestResourceStream(wehrleLogo);
+           
+            ComputerInfo Info = ComputerInfo.CreateObject();
             Document PDFFile = Document.Create(pdf =>
             {
                 pdf.Page(CurrentPage =>
@@ -130,14 +132,25 @@ namespace WinPeOperator
                         .Text(text =>
                         {
                             int count = 0;
-                            while(count < 10)
+                            while (count < 10)
                             {
                                 text.EmptyLine();
                                 count++;
                             }
 
                             text.Span("Hiermit wird bestätigt das dass oben stehende Gerät sicher und unwiederuflich gelöscht wurde" + Environment.NewLine);
-                            text.Span("Die Zerstörung der Daten ist nur elektronisch erfolgt, die Hardware kann sofern benötigt weiterverwendet werden");
+                            text.Span("Die Zerstörung der Daten ist nur elektronisch erfolgt, die Hardware kann sofern benötigt weiterverwendet werden" + Environment.NewLine);
+
+                            for(int i = 0; i < 5; i++)
+                            {
+                                text.EmptyLine();
+                            }
+
+                            text.Span($"Seriennummer: {Info.SerialNumber}{Environment.NewLine}");
+                            text.Span($"Model {Info.Name}{Environment.NewLine}");
+                            text.Span($"Version: {Info.Version}{Environment.NewLine}");
+                            text.Span($"UUID: {Info.SystemUUID}{Environment.NewLine}");
+                            text.Span($"Vendor: {Info.Vendor}{Environment.NewLine}");
                         });
 
 
