@@ -1,5 +1,7 @@
 ﻿using WinPeOperator;
 using System.CommandLine;
+using PasswordLock;
+using System.Windows.Threading;
 
 RootCommand rootCommand = new RootCommand();
 
@@ -222,5 +224,34 @@ PackageInstall.SetHandler((variableWindowsOfflinePath, variableSourcePath) =>
 }, WindowsOffline, SourcePath);
 
 rootCommand.Add(PackageInstall);
+
+//Start Password Lock
+Command PasswordLock = new Command(name: "--Lock", description: "Start the password Lock");
+Option<string> Secret = new Option<string>(name: "--Password", description: "Enter the Secret for the lock")
+{
+    IsRequired = true
+};
+
+PasswordLock.Add(Secret);
+
+PasswordLock.SetHandler((variableSecret) =>
+{
+    // create a thread  
+    Thread PasswortLockThread = new Thread(new ThreadStart(() =>
+    {
+        // create and show the window
+        PasswordLockPage Lock = new PasswordLockPage(variableSecret);
+        Lock.ShowDialog();
+
+        // start the Dispatcher processing  
+        Dispatcher.Run();
+    }));
+
+    PasswortLockThread.SetApartmentState(ApartmentState.STA);
+    PasswortLockThread.Start();
+
+}, Secret);
+
+rootCommand.Add(PasswordLock);
 
 rootCommand.Invoke(args);
